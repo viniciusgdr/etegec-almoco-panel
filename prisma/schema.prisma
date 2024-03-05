@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model DescentTimeDaily {
+  id         String                     @id @default(cuid())
+  date       DateTime
+  dailyClass DescentTimeDailyHasClass[]
+
+  @@map("descent_time_daily")
+}
+
+model DescentTimeDailyHasClass {
+  id                 String @id @default(cuid())
+  classId            String
+  descentTimeDailyId String
+
+  hour  Int
+  minute Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  class            Class            @relation(fields: [classId], references: [id])
+  descentTimeDaily DescentTimeDaily @relation(fields: [descentTimeDailyId], references: [id])
+
+  @@map("descent_time_daily_has_class")
+}
+
+model Class {
+  id                       String                     @id @default(cuid())
+  name                     String
+  createdAt                DateTime                   @default(now())
+  updatedAt                DateTime                   @updatedAt
+  descentTimeDailyHasClass DescentTimeDailyHasClass[]
+
+  @@map("classes")
+}
