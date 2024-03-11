@@ -1,6 +1,8 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export const Navbar = () => {
+  const router = useRouter()
   return (
     <div className="w-full navbar bg-base-300 text-white">
       <Link
@@ -10,7 +12,7 @@ export const Navbar = () => {
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link href="/dashboard">Painel do Monitor</Link>
+            <a onClick={() => router.push('/dashboard')}>Painel do Monitor</a>
           </li>
         </ul>
       </div>
