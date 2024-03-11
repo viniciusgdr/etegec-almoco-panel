@@ -35,6 +35,9 @@ export const authOptions: AuthOptions = {
         if (!user) {
           throw new Error("E-mail não encontrado ou senha inválida!")
         }
+        if (!user.approved) {
+          throw new Error("O usuário ainda não foi aprovado pelo administrador!")
+        }
         return {
           id: user.id,
           name: user.name,
