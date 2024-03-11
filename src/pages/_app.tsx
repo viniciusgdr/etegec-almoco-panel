@@ -31,8 +31,8 @@ export default function App({ Component, pageProps, router: routerAppProps }: Ap
       <link rel="manifest" href="/manifest.json" />
       <meta name="description" content="Horários de descida programados da ETEGEC" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="icon" href={'/etegec-almoco.png'} />
-      <meta property="og:image" content={'/etegec-almoco.png'} />
+      <link rel="icon" href={'/images/etegec-almoco.png'} />
+      <meta property="og:image" content={'/images/etegec-almoco.png'} />
       <meta property="og:title" content="Almoço ETEGEC" />
       <meta property="og:description" content="Horários de descida programados da ETEGEC" />
       <meta property="og:url" content="https://etegec-almoco.viniciusgdr.com" />
