@@ -6,13 +6,19 @@ import { useRouter } from 'next/router';
 import { Session } from '@viniciusgdr/models/session';
 import { useEffect, useState } from 'react';
 import { DescentTimeDaily, DescentTimeDailyHasClass, Class } from '@prisma/client'
+import prismaClient from '@viniciusgdr/db/prismaClient';
 
 type DeciveLunch = DescentTimeDailyHasClass & {
   class: Class
 }
-export default function Home() {
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
-  const [deciveLunch, setDeciveLunch] = useState<DeciveLunch[]>([])
+
+interface HomeProps {
+  deciveLunch: DeciveLunch[]
+}
+
+export default function Home({ deciveLunch: initialDeciveLunch }: HomeProps) {
+  // const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
+  const [deciveLunch, setDeciveLunch] = useState<DeciveLunch[]>(initialDeciveLunch)
   const [dateNow, setDateNow] = useState<Date>()
 
   useEffect(() => {
@@ -21,14 +27,14 @@ export default function Home() {
     }, 1000)
     return () => clearInterval(interval)
   }, [])
-  useEffect(() => {
-    (async () => {
-      if (!selectedDate) return
-      const request = await fetch(`/api/decive-lunch?date=${selectedDate.toISOString().split('T')[0]}`)
-      const response = await request.json()
-      setDeciveLunch(response)
-    })()
-  }, [selectedDate])
+  // useEffect(() => {
+  //   (async () => {
+  //     if (!selectedDate) return
+  //     const request = await fetch(`/api/decive-lunch?date=${selectedDate.toISOString().split('T')[0]}`)
+  //     const response = await request.json()
+  //     setDeciveLunch(response)
+  //   })()
+  // }, [selectedDate])
 
   return (
     <div className="container mx-auto justify-center w-full mt-12 pb-12">
@@ -74,4 +80,28 @@ export default function Home() {
       </div>
     </div>
   )
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const dateOnly = new Date(new Date().toISOString().split('T')[0])
+  const decivesLunch = await prismaClient.descentTimeDailyHasClass.findMany({
+    where: {
+      descentTimeDaily: {
+        date: dateOnly
+      }
+    },
+    include: {
+      class: {
+        select: {
+          id: true,
+          name: true
+        }
+      }
+    }
+  })
+  return {
+    props: {
+      deciveLunch: JSON.parse(JSON.stringify(decivesLunch.map((deciveLunch) => deciveLunch)))
+    }
+  }
 }
