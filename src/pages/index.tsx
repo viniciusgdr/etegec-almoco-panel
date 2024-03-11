@@ -39,7 +39,7 @@ export default function Home() {
           Horário de Brasília
         </span>
       </div>
-      <div className="flex flex-col justify-center items-center text-center">
+      <div className="flex flex-col justify-center items-center text-center mb-12">
         <h1 className="text-xl md:text-2xl text-white mb-4">Horários de Descida Programados</h1>
         <table className="table table-zebra bg-base-300 text-white shadow-xl rounded-3xl">
           <thead className="bg-base-200 text-white">
@@ -64,7 +64,7 @@ export default function Home() {
                   <td>{index + 1}</td>
                   <td>
                     {deciveLunch?.hour?.toLocaleString('pt-BR', { maximumFractionDigits: 2 }) ?? '00'}:
-                    {deciveLunch?.minute?.toLocaleString('pt-BR', { maximumFractionDigits: 2 }) ?? '00'}
+                    {deciveLunch?.minute?.toLocaleString('pt-BR', { maximumFractionDigits: 2, minimumIntegerDigits: 2 }) ?? '00'}
                   </td>
                   <td>{deciveLunch.class.name}</td>
                 </tr>

@@ -53,7 +53,7 @@ export default function DeciveLunch({ classes }: DeciveLunchProps) {
         header: 'Sala',
       },
       {
-        accessorFn: (row) => `${row?.hour?.toLocaleString('pt-BR', { maximumFractionDigits: 2 }) ?? '00'}:${row?.minute?.toLocaleString('pt-BR', { maximumFractionDigits: 2 }) ?? '00'}`,
+        accessorFn: (row) => `${row?.hour?.toLocaleString('pt-BR', { maximumFractionDigits: 2 }) ?? '00'}:${row?.minute?.toLocaleString('pt-BR', { maximumFractionDigits: 2, minimumIntegerDigits: 2 }) ?? '00'}`,
         header: 'Horário de Descida',
       },
       {
