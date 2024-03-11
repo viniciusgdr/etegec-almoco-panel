@@ -60,10 +60,13 @@ export default function Home({ deciveLunch: initialDeciveLunch }: HomeProps) {
               .sort((a, b) => {
                 const dateA = new Date(a.hour ?? 0, a.minute ?? 0)
                 const dateB = new Date(b.hour ?? 0, b.minute ?? 0)
-                return dateA.getTime() - dateB.getTime()
-              })
-              .sort((a, b) => {
-                return a.priority - b.priority
+                const priorityA = a.priority
+                const priorityB = b.priority
+                if (dateA < dateB) return -1
+                if (dateA > dateB) return 1
+                if (priorityA < priorityB) return -1
+                if (priorityA > priorityB) return 1
+                return 0
               })
               .map((deciveLunch, index) => (
                 <tr key={index}>
