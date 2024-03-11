@@ -54,7 +54,7 @@ export const Header = ({
         </div>
         <div className="md:hidden flex justify-between items-center gap-x-4">
           {session ? (
-            <div className={"dropdown"}>
+            <div className={"dropdown dropdown-left"}>
               <div tabIndex={0} role="img" className="">
                 <FaUserAlt />
               </div>

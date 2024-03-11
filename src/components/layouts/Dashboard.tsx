@@ -21,7 +21,7 @@ export const DashboardLayout = ({ Component, pageProps }: AppProps) => {
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col  bg-black h-full min-h-screen md:max-h-screen font-sora">
+      <div className="drawer-content flex flex-col  bg-black h-full min-h-screen font-sora">
         <NextNProgress color='linear-gradient(90deg, #ff0080, #7928ca)' />
         <div className='bg-site bg-cover bg-no-repeat h-full w-full transition duration-[5000ms]'>
           <Component {...pageProps} />
