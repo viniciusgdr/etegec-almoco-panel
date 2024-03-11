@@ -31,7 +31,7 @@ export default function Home() {
   }, [selectedDate])
 
   return (
-    <div className="container mx-auto justify-center w-full mt-12">
+    <div className="container mx-auto justify-center w-full mt-12 pb-12">
       <div className="flex flex-col justify-center items-center text-center mb-12">
         <h1 className="text-2xl md:text-4xl text-white mb-4">Hora Agora</h1>
         <h1 className="text-5xl md:text-8xl text-white">{dateNow?.toLocaleTimeString('pt-BR') ?? '00:00:00'}</h1>
@@ -39,7 +39,7 @@ export default function Home() {
           Horário de Brasília
         </span>
       </div>
-      <div className="flex flex-col justify-center items-center text-center mb-12">
+      <div className="flex flex-col justify-center items-center text-center">
         <h1 className="text-xl md:text-2xl text-white mb-4">Horários de Descida Programados</h1>
         <table className="table table-zebra bg-base-300 text-white shadow-xl rounded-3xl">
           <thead className="bg-base-200 text-white">
