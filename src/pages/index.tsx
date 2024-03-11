@@ -102,7 +102,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   })
   return {
     props: {
-      deciveLunch: JSON.parse(JSON.stringify(decivesLunch.map((deciveLunch) => deciveLunch)))
+      deciveLunch: JSON.parse(JSON.stringify(decivesLunch.map((deciveLunch) => deciveLunch))),
     }
   }
 }

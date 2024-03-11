@@ -1,8 +1,10 @@
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 export const Navbar = () => {
   const router = useRouter()
+  const { data: session } = useSession()
   return (
     <div className="w-full navbar bg-base-300 text-white">
       <Link
@@ -12,7 +14,13 @@ export const Navbar = () => {
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a onClick={() => router.push('/dashboard')}>Painel do Monitor</a>
+            {
+              session ? (
+                <Link href="/dashboard">Painel do Monitor</Link>
+              ) : (
+                <Link href="/account/login">Login</Link>
+              )
+            }
           </li>
         </ul>
       </div>

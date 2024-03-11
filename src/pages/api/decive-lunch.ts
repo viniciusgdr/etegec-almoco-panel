@@ -1,8 +1,21 @@
 import prismaClient from '@viniciusgdr/db/prismaClient';
+import { Session } from '@viniciusgdr/models/session';
 import bcrypt from 'bcrypt';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { getSession } from 'next-auth/react';
 import validator from 'validator';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const session = await getSession({
+    req: {
+      headers: {
+        cookie: req.headers.cookie
+      }
+    }
+  }) as Session | null;
+  if (!session) {
+    res.status(401).json({ error: 'Unauthorized' })
+    return
+  }
   switch (req.method) {
     case 'POST':
       return POST(req, res)
