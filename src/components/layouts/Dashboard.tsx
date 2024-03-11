@@ -27,11 +27,11 @@ export const DashboardLayout = ({ Component, pageProps }: AppProps) => {
           <Component {...pageProps} />
         </div>
       </div>
-      <div className="drawer-side">
+      <div className="drawer-side z-50">
         <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 min-h-full bg-base-200">
           {dashboardItems.map((item, index) => (
-            <li key={index}>
+            <li key={index} onClick={() => { (document as any).getElementById('my-drawer-3').click() }}>
               <Link href={item.href} className="flex flex-row items-center text-xl">
                 {item.icon}
                 {item.name}

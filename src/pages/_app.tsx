@@ -25,10 +25,10 @@ export default function App({ Component, pageProps, router: routerAppProps }: Ap
         router.asPath.startsWith(startPanelRoute) ? (
           <DashboardLayout Component={Component} pageProps={pageProps} router={routerAppProps} />
         ) : (
-          <>
+          <div className='bg-site bg-cover bg-no-repeat h-full w-full transition duration-[5000ms] min-h-screen font-sora'>
             <Navbar />
             <Component {...pageProps} />
-          </>
+          </div>
         )
       }
       <ToastContainer />
