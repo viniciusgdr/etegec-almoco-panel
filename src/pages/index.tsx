@@ -58,14 +58,12 @@ export default function Home({ deciveLunch: initialDeciveLunch }: HomeProps) {
           <tbody>
             {deciveLunch
               .sort((a, b) => {
-                const dateA = new Date(a.hour ?? 0, a.minute ?? 0)
-                const dateB = new Date(b.hour ?? 0, b.minute ?? 0)
-                const priorityA = a.priority
-                const priorityB = b.priority
-                if (dateA < dateB) return -1
-                if (dateA > dateB) return 1
-                if (priorityA < priorityB) return -1
-                if (priorityA > priorityB) return 1
+                if (a.hour < b.hour) return -1
+                if (a.hour > b.hour) return 1
+                if (a.minute < b.minute) return -1
+                if (a.minute > b.minute) return 1
+                if (a.priority < b.priority) return -1
+                if (a.priority > b.priority) return 1
                 return 0
               })
               .map((deciveLunch, index) => (
